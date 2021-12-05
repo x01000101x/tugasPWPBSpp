@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Login V12</title>
+	<title>Login SPP</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -26,11 +26,14 @@
 </head>
 
 <body>
+	<script>
+		alert('<?php echo $this->session->flashdata('msg'); ?>');
+	</script>
 
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('https://c.tenor.com/qLwHysB86VYAAAAd/lofi.gif');">
 			<div class="wrap-login100 p-t-190 p-b-30">
-				<form class="login100-form validate-form" action="<?php echo site_url('login/auth'); ?>" method="post">
+				<form class="login100-form validate-form" action="<?php echo site_url('Login/auth'); ?>" method="post">
 					<div class="login100-form-avatar">
 						<img src="https://cliply.co/wp-content/uploads/2019/03/371903161_BLINKING_EYE_400px.gif" alt="AVATAR">
 					</div>

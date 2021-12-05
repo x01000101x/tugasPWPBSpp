@@ -15,10 +15,10 @@ class Login extends CI_Controller
 		$this->load->view('login_view');
 	}
 
-	function auth()
+	public function auth()
 	{
 		$username = $this->input->post('username', TRUE);
-		$password = md5($this->input->post('password', TRUE));
+		$password = $this->input->post('password', TRUE);
 		$cek_user = $this->login_model->cek_user($username, $password);
 		if ($cek_user->num_rows() > 0) {
 			$data = $cek_user->row_array();
@@ -40,7 +40,12 @@ class Login extends CI_Controller
 				$this->session->set_userdata('akses', 'siswa');
 				redirect('admin/pembayaran');
 			}
-		} else {
+		}
+		// elseif ($cek_user->num_rows() < 1) {
+		// 	$this->session->set_flashdata('msg', 'Username or Password is Wrong');
+		// 	redirect('login');
+		// } 
+		else {
 			$this->session->set_flashdata('msg', 'Username or Password is Wrong');
 			redirect('login');
 		}
