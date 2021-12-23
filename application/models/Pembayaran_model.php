@@ -85,6 +85,15 @@ class Pembayaran_model extends CI_Model
 		$this->db->delete('pembayaran');
 	}
 
+	public function Minus()
+	{
+		$this->db->select("SUM(spp - jumlah_bayar)");
+		$this->db->from("pembayaran");
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+
 	public function getAll()
 	{
 		//return $this->db->get($this->_table)->result();

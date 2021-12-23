@@ -71,7 +71,6 @@ class PembayaranSpp extends CI_Controller
 	}
 
 
-
 	public function Edit($id)
 	{
 		$id_petugas = $this->input->post('id_petugas');
