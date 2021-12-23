@@ -41,7 +41,7 @@ class Login extends CI_Controller
 			} elseif ($level == 'siswa') {
 				$this->session->set_userdata('akses', 'siswa');
 				$this->session->set_flashdata('msg', 'Berhasil');
-				redirect('admin/pembayaran');
+				redirect('admin/User');
 			}
 		}
 		// elseif ($cek_user->num_rows() < 1) {
