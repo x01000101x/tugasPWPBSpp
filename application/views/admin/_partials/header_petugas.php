@@ -102,7 +102,7 @@
 					</ul>
 					<ul class="list-unstyled navbar__list">
 						<li class="has-sub">
-							<a class="js-arrow" href="<?= base_url('admin/Master') ?>">
+							<a class="js-arrow" href="<?= base_url('admin/MasterPetugas') ?>">
 								<i class="fas fa-home"></i>Master</a>
 
 						</li>

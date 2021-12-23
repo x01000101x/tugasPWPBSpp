@@ -93,16 +93,16 @@
 			<div class="menu-sidebar__content js-scrollbar1">
 				<nav class="navbar-sidebar">
 					<ul class="list-unstyled navbar__list">
-						<li class="has-sub">
-							<a class="js-arrow" href="<?= base_url('admin') ?>">
+						<li class="active has-sub">
+							<a class="js-arrow" href="<?= base_url('admin/PetugasIndex') ?>">
 								<i class="fas fa-tachometer-alt"></i>Dashboard</a>
 
 						</li>
 
 					</ul>
 					<ul class="list-unstyled navbar__list">
-						<li class="active has-sub">
-							<a class="js-arrow" href="<?= base_url('admin/Master') ?>">
+						<li class="has-sub">
+							<a class="js-arrow" href="<?= base_url('admin/MasterPetugas') ?>">
 								<i class="fas fa-home"></i>Master</a>
 
 						</li>
@@ -138,14 +138,14 @@
 											<div class="info clearfix">
 												<div class="image">
 													<a href="#">
-														<img src="https://i.gifer.com/Dtf.gif	" alt="John Doe" />
+														<img src="https://i.gifer.com/Dtf.gif" alt="John Doe" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
 														<a href="#"><?= $this->session->userdata('akses') ?></a>
 													</h5>
-													<span class="email">Admin</span>
+													<span class="email">Petugas SPP</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
