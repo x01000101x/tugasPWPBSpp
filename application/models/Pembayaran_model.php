@@ -87,7 +87,8 @@ class Pembayaran_model extends CI_Model
 
 	public function Minus()
 	{
-		$this->db->select("SUM(spp - jumlah_bayar)");
+		$this->db->select("SUM(spp.nominal - pembayaran.jumlah_bayar)");
+		$this->db->join('spp', 'spp.id_spp = pembayaran.id_spp');
 		$this->db->from("pembayaran");
 		$query = $this->db->get();
 		return $query->result_array();

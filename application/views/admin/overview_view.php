@@ -73,8 +73,8 @@
 										// $query = $this->db->query("SELECT SUM(u.nominal) FROM siswa s INNER JOIN spp u ON u.id_spp = s.id_spp")->row()->nominal;
 										// echo $query;
 
-										foreach ($summer as $key => $val) {
-											echo rupiah($val["SUM(spp.nominal)"]);
+										foreach ($minus_pembayaran as $key => $val) {
+											echo rupiah($val["SUM(spp.nominal - pembayaran.jumlah_bayar)"]);
 										}
 
 
