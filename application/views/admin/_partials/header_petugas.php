@@ -129,7 +129,7 @@
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="https://i.gifer.com/Dtf.gif" alt="John Doe" />
+											<img src="https://cutewallpaper.org/21/animated-gif-transparent-background/Cartoon-GIFs-Get-the-best-GIF-on-GIPHY.gif" alt="John Doe" />
 										</div>
 										<div class="content">
 											<a class="js-acc-btn" href="#"><?= $this->session->userdata('akses') ?></a>
@@ -138,7 +138,7 @@
 											<div class="info clearfix">
 												<div class="image">
 													<a href="#">
-														<img src="https://i.gifer.com/Dtf.gif" alt="John Doe" />
+														<img src="https://cutewallpaper.org/21/animated-gif-transparent-background/Cartoon-GIFs-Get-the-best-GIF-on-GIPHY.gif" alt="John Doe" />
 													</a>
 												</div>
 												<div class="content">

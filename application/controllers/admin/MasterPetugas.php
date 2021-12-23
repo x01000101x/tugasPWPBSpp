@@ -25,7 +25,7 @@ class MasterPetugas extends CI_Controller
 			$data["total_spp"] = $this->spp_model->showNum();
 			$data["total_keahlian"] = $this->kompetensi_keahlian_model->showNum();
 			$data["data_spp"] = $this->spp_model->getDataSpp();
-			$this->load->view('admin/_partials/header_petugas_master.php');
+			$this->load->view('admin/_partials/header_master_petugas.php');
 			$this->load->view("admin/view_petugas_master.php", $data);
 			$this->load->view('admin/_partials/footer.php');
 		} else {
