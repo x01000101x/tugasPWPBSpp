@@ -485,8 +485,8 @@
 						</div>
 						<div class="form-group">
 							<label for="bulan_dibayar">Bulan Bayar SPP</label>
-							<select class="form-control" name="bulan_dibayar" id="bulan_dibayar" value="<?= $pembayaran->bulan_dibayar ?>" required>
-
+							<select class="form-control" name="bulan_dibayar" id="bulan_dibayar" required>
+								<option selected><?= $pembayaran->bulan_dibayar ?></option>
 								<option>Januari</option>
 								<option>Februari</option>
 								<option>Maret</option>
@@ -505,11 +505,28 @@
 						</div>
 						<div class="form-group">
 							<label for="tahun_dibayar">Tahun Bayar SPP</label>
-							<input type="number" name="tahun_dibayar" value="2021" step="1" min="2000" max="2050" class="form-control" id="tahun_dibayar" placeholder="Masukkan Tahun..." required>
+							<input type="number" name="tahun_dibayar" value="2021" step="1" min="2000" max="2050" class="form-control" id="tahun_dibayar" value="<?= $pembayaran->tahun_dibayar ?>" placeholder="Masukkan Tahun..." required>
 						</div>
 						<div class="form-group">
 							<label for="id_spp">SPP</label>
 							<select class="form-control" name="id_spp" id="id_spp" required>
+								<option value="<?= intval($pembayaran->id_spp) ?>">
+
+									<?php
+									$this->db->select('nominal');
+									$this->db->from('spp');
+									$this->db->where('id_spp =', $pembayaran->id_spp);
+									// $this->db->join('nisn', 'nisn.id_kk = kompetensi_siswa.id_kk');
+									$query = $this->db->get();
+									// print_r($query->result());
+									$jnck = $query->result_array();
+									foreach ($jnck as $asw) {
+										echo $asw['nominal'];
+									}
+
+
+
+									?></option>
 								<?php foreach ($data_spp as $spp) : ?>
 									<option value="<?= intval($spp->id_spp) ?>">
 
@@ -533,7 +550,7 @@
 						</div>
 						<div class="form-group">
 							<label for="jumlah_bayar">Jumlah bayar SPP</label>
-							<input type="text" name="jumlah_bayar" class="form-control" id="jumlah_bayar" placeholder="Masukkan Jumlah Bayar..." required>
+							<input type="text" name="jumlah_bayar" class="form-control" id="jumlah_bayar" value="<?= $pembayaran->jumlah_bayar ?>" placeholder="Masukkan Jumlah Bayar..." required>
 						</div>
 
 
@@ -554,9 +571,9 @@
 
 
 <!-- Modal Hapus -->
-<?php foreach ($data_siswa as $siswa) : ?>
+<?php foreach ($data_pembayaran as $pembayaran) : ?>
 
-	<div class="modal fade" name="hapusmodal" id="hapusmodal<?= $siswa->nisn; ?>" tabindex="-1" aria-labelledby="hapusmodal" aria-hidden="true">
+	<div class="modal fade" name="hapusmodal" id="hapusmodal<?= $pembayaran->id_pembayaran; ?>" tabindex="-1" aria-labelledby="hapusmodal" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -566,8 +583,8 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="<?= base_url('admin/Murid/Delete/') . $siswa->nisn ?>" method="POST">
-						<h5 style="color: black;">Apakah Anda yakin akan menghapus siswa dengan NISN <?= $siswa->nisn; ?> (<?= $siswa->nama; ?>)?</h5>
+					<form action="<?= base_url('admin/PembayaranSpp/Delete/') . $pembayaran->id_pembayaran ?>" method="POST">
+						<h5 style="color: black;">Apakah Anda yakin akan menghapus pembayaran dengan NISN <?= $pembayaran->nisn; ?>?</h5>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

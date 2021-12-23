@@ -70,6 +70,8 @@ class PembayaranSpp extends CI_Controller
 		redirect('admin/PembayaranSpp');
 	}
 
+
+
 	public function Edit($id)
 	{
 		$id_petugas = $this->input->post('id_petugas');
