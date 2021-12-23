@@ -5,7 +5,11 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="overview-wrap">
-						<h2 class="title-1">Menu</h2>
+						<h2 class="title-1">Selamat Datang, <?php
+
+															$fag = $this->session->userdata('siswa');
+															echo $fag['username'];
+															?></h2>
 
 					</div>
 				</div>

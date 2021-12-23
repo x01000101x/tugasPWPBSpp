@@ -17,6 +17,11 @@ class Login_model extends CI_Model
 		return $result;
 	}
 
+	public function cek_murid($table, $where)
+	{
+		return $this->db->get_where($table, $where);
+	}
+
 	public function AddData($data)
 	{
 		$this->db->insert('login', $data);

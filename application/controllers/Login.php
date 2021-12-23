@@ -39,6 +39,19 @@ class Login extends CI_Controller
 				$this->session->set_flashdata('msg', 'Berhasil');
 				redirect('admin/PetugasIndex');
 			} elseif ($level == 'siswa') {
+				$where = array(
+					'username' => $username,
+					'password' => $password
+				);
+				$cek = $this->login_model->cek_murid("login", $where);
+				$rows = $cek->num_rows();
+				if ($rows > 0) {
+					$cek = $cek->row_array();
+					$data_session = array(
+						'username' => $cek['username'],
+					);
+				}
+				$this->session->set_userdata('siswa', $data_session);
 				$this->session->set_userdata('akses', 'siswa');
 				$this->session->set_flashdata('msg', 'Berhasil');
 				redirect('admin/User');
