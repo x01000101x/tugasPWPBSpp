@@ -13,7 +13,7 @@ class PetugasIndex extends CI_Controller
 
 	public function index()
 	{
-		if ($this->session->userdata('akses') == 'admin' || $this->session->userdata('akses') == 'petugas') {
+		if ($this->session->userdata('akses') == 'petugas') {
 			// $get = $this->login_model->GetDataLogin();
 			// $data = array('data_login' => $get);
 
@@ -37,7 +37,7 @@ class PetugasIndex extends CI_Controller
 			$data["summer"] = $this->siswa_model->sumAll();
 			$data["summer_pembayaran"] = $this->pembayaran_model->sumAll();
 			$data["minus_pembayaran"] = $this->pembayaran_model->Minus();
-			$this->load->view('admin/_partials/header.php');
+			$this->load->view('admin/_partials/header_petugas.php');
 			$this->load->view("admin/view_petugas.php", $data);
 			$this->load->view('admin/_partials/footer.php');
 		} else {

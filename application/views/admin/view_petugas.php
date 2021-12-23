@@ -215,7 +215,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="<?= base_url('admin/PembayaranSpp/Tambah') ?>" method="POST">
+				<form action="<?= base_url('admin/PetugasIndex/Tambah') ?>" method="POST">
 					<div class="form-group">
 						<label for="petugas">Petugas</label>
 						<select class="form-control" name="id_petugas" id="id_petugas" required>
@@ -349,7 +349,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="<?= base_url('admin/PembayaranSpp/Edit/') . $pembayaran->id_pembayaran ?>" method="POST">
+					<form action="<?= base_url('admin/PetugasIndex/Edit/') . $pembayaran->id_pembayaran ?>" method="POST">
 
 
 						<div class="form-group">
