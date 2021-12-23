@@ -57,6 +57,7 @@ class Login extends CI_Controller
 	{
 		$this->session->sess_destroy();
 		$url = base_url('');
+		$this->session->set_flashdata('message', 'Berhasil');
 		redirect($url);
 	}
 }

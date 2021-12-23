@@ -87,7 +87,7 @@
 		<aside class="menu-sidebar d-none d-lg-block">
 			<div class="logo">
 				<a href="#">
-					<img src="images/icon/logo.png" alt="SPP SMKN4" />
+					<img style="height: 50px;" src="https://colourverse.com/wp-content/uploads/2019/11/Sponge.gif" alt="SPP SMKN4" /> ADMIN SPP
 				</a>
 			</div>
 			<div class="menu-sidebar__content js-scrollbar1">
@@ -102,7 +102,7 @@
 					</ul>
 					<ul class="list-unstyled navbar__list">
 						<li class="active has-sub">
-							<a class="js-arrow" href="<?= base_url('admin/master') ?>">
+							<a class="js-arrow" href="<?= base_url('admin/Master') ?>">
 								<i class="fas fa-home"></i>Master</a>
 
 						</li>
@@ -129,23 +129,23 @@
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<img src="images/icon/avatar-01.jpg" alt="John Doe" />
+											<img src="https://i.gifer.com/Dtf.gif" alt="John Doe" />
 										</div>
 										<div class="content">
-											<a class="js-acc-btn" href="#">john doe</a>
+											<a class="js-acc-btn" href="#"><?= $this->session->userdata('akses') ?></a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
 													<a href="#">
-														<img src="images/icon/avatar-01.jpg" alt="John Doe" />
+														<img src="https://i.gifer.com/Dtf.gif	" alt="John Doe" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">john doe</a>
+														<a href="#"><?= $this->session->userdata('akses') ?></a>
 													</h5>
-													<span class="email">johndoe@example.com</span>
+													<span class="email">Admin</span>
 												</div>
 											</div>
 											<div class="account-dropdown__body">
@@ -160,7 +160,8 @@
 
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#">
+												<form action="<?= base_url('login/logout') ?>" method="POST"></form>
+												<a href="<?= base_url('login/logout'); ?>">
 													<i class="zmdi zmdi-power"></i>Logout</a>
 											</div>
 										</div>

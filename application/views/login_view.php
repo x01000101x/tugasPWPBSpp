@@ -26,9 +26,6 @@
 </head>
 
 <body>
-	<script>
-		alert('<?php echo $this->session->flashdata('msg'); ?>');
-	</script>
 
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('https://c.tenor.com/qLwHysB86VYAAAAd/lofi.gif');">
@@ -92,6 +89,7 @@
 	<script src=" <? base_url('vendor/select2/select2.min.js'); ?>"></script>
 	<!--===============================================================================================-->
 	<script src="<? base_url('js/main.js'); ?>"></script>
+
 
 </body>
 

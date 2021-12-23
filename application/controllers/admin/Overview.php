@@ -23,6 +23,7 @@ class Overview extends CI_Controller
 			$data["siswa"] = $this->siswa_model->graph();
 			$data["summer"] = $this->siswa_model->sumAll();
 			$data["summer_pembayaran"] = $this->pembayaran_model->sumAll();
+			$data["minus_pembayaran"] = $this->pembayaran_model->Minus();
 			$this->load->view('admin/_partials/header');
 			$this->load->view('admin/overview_view', $data);
 			$this->load->view('admin/_partials/footer');

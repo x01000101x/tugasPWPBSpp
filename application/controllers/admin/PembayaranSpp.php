@@ -36,6 +36,7 @@ class PembayaranSpp extends CI_Controller
 			$data["data_pembayaran"] = $this->pembayaran_model->getDataPembayaran();
 			$data["summer"] = $this->siswa_model->sumAll();
 			$data["summer_pembayaran"] = $this->pembayaran_model->sumAll();
+			$data["minus_pembayaran"] = $this->pembayaran_model->Minus();
 			$this->load->view('admin/_partials/header.php');
 			$this->load->view("admin/pembayaran_view.php", $data);
 			$this->load->view('admin/_partials/footer.php');

@@ -64,36 +64,38 @@
 
 				<div class="col-sm-6 col-lg-3">
 					<div class="overview-item overview-item--c3">
-						<div class="overview__inner">
-							<div class="overview-box clearfix">
-								<div class="icon">
-									<!-- <img style="height: 60px;" src="https://lh3.googleusercontent.com/proxy/mrafnVhBXPJvzzY2aqnZr_aKvoFNKPybEcdZ8bARTDNFBoqisoR8PuaZgvcfp3r-beMAZ9l0J_lbXOTTKlmdxfNJRhhAYuXqycqsznyunTxBC9RkzxKwiuGE"> -->
+						<a href="<?= base_url('admin/PembayaranSpp') ?>">
+							<div class="overview__inner">
+								<div class="overview-box clearfix">
+									<div class="icon">
+										<!-- <img style="height: 60px;" src="https://lh3.googleusercontent.com/proxy/mrafnVhBXPJvzzY2aqnZr_aKvoFNKPybEcdZ8bARTDNFBoqisoR8PuaZgvcfp3r-beMAZ9l0J_lbXOTTKlmdxfNJRhhAYuXqycqsznyunTxBC9RkzxKwiuGE"> -->
 
-									<i class="zmdi zmdi-money"></i>
+										<i class="zmdi zmdi-money"></i>
+									</div>
+									<div class="text">
+										<h2><?php
+											// $sql = "SELECT SUM(u.nominal) FROM siswa s INNER JOIN spp u ON u.id_spp = s.id_spp";
+											// $query = $this->db->query($sql);
+											// print_r($query); 
+
+											// $query = $this->db->query("SELECT SUM(u.nominal) FROM siswa s INNER JOIN spp u ON u.id_spp = s.id_spp")->row()->nominal;
+											// echo $query;
+
+											foreach ($minus_pembayaran as $key => $val) {
+												echo rupiah($val["SUM(spp.nominal - pembayaran.jumlah_bayar)"]);
+											}
+
+
+
+											?></h2>
+										<span>Total Tunggakan SPP</span>
+									</div>
 								</div>
-								<div class="text">
-									<h2><?php
-										// $sql = "SELECT SUM(u.nominal) FROM siswa s INNER JOIN spp u ON u.id_spp = s.id_spp";
-										// $query = $this->db->query($sql);
-										// print_r($query); 
-
-										// $query = $this->db->query("SELECT SUM(u.nominal) FROM siswa s INNER JOIN spp u ON u.id_spp = s.id_spp")->row()->nominal;
-										// echo $query;
-
-										foreach ($minus_pembayaran as $key => $val) {
-											echo rupiah($val["SUM(spp.nominal - pembayaran.jumlah_bayar)"]);
-										}
-
-
-
-										?></h2>
-									<span>Total Tunggakan SPP</span>
+								<div class="overview-chart">
+									<!-- <canvas id="widgetChart3"></canvas> -->
 								</div>
 							</div>
-							<div class="overview-chart">
-								<!-- <canvas id="widgetChart3"></canvas> -->
-							</div>
-						</div>
+						</a>
 					</div>
 				</div>
 				<div class="col-sm-6 col-lg-3">
