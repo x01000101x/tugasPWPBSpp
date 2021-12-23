@@ -24,9 +24,21 @@
 										<i class="zmdi zmdi-account-o"></i>
 									</div>
 									<div class="text">
-										<h2><?php $this->db->where('nisn >=', 0);
-											$query = $this->db->get('siswa');
-											echo $query->num_rows(); ?></h2>
+										<h2><?php
+											$this->db->select('c.nominal, d.jumlah_bayar');
+											$this->db->from('login a');
+											$this->db->join('siswa b', 'b.id_login=a.id_login',);
+											$this->db->join('spp c', 'c.id_spp=b.id_spp');
+											$this->db->join('pembayaran d', 'd.nisn=b.nisn');
+											$this->db->where('a.username', $fag['username']);
+											$query = $this->db->get();
+											$anj = $query->result_array();
+											foreach ($anj as $val) {
+												// print_r($val['jumlah_bayar']);
+												$math = intval($val['nominal']) - intval($val['jumlah_bayar']);
+												echo rupiah($math);
+											}
+											?></h2>
 										<span>Siswa</span>
 
 									</div>
@@ -56,9 +68,15 @@
 							<thead>
 								<tr>
 									<th>No</th>
-									<th>Username</th>
-									<th>Level</th>
-									<th>Aksi</th>
+									<th>Petugas</th>
+									<th>Nama / NISN</th>
+									<th>Tanggal bayar</th>
+									<th>Bulan</th>
+									<th>Tahun</th>
+									<th>SPP</th>
+									<th>Jumlah bayar</th>
+									<th>Tunggakan</th>
+
 
 								</tr>
 							</thead>
@@ -67,26 +85,73 @@
 
 								<?php
 								$count = 0;
-								foreach ($data_login as $login) :
+								foreach ($data_pembayaran as $pembayaran) :
 									$count = $count + 1; ?>
 
 
 									<tr>
 
 										<td><?= $count; ?></td>
-										<td><?= $login->username; ?></td>
-										<td><?= $login->level; ?></td>
+										<td><?php $this->db->select('nama_petugas');
+											$this->db->from('petugas');
+											$this->db->where('id_petugas =', $pembayaran->id_petugas);
+											// $this->db->join('kelas', 'kelas.id_kk = kompetensi_siswa.id_kk');
+											$query = $this->db->get();
+											// print_r($query->result());
+											$jnck = $query->result_array();
+											foreach ($jnck as $asw) {
+												echo $asw['nama_petugas'];
+											} ?></td>
 										<td>
-											<!-- Button trigger modal edit-->
 
-											<button type="button" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#editmodal<?= $login->id_login; ?>">
-												Edit
-											</button>
-											<!-- Button trigger modal hapus -->
-											<button type="button" name="hapus" class="btn btn-danger" data-toggle="modal" data-target="#hapusmodal<?= $login->id_login; ?>">
-												Hapus
-											</button>
+
+											<?php
+											$this->db->select('nama');
+											$this->db->from('siswa');
+											$this->db->where('nisn =', $pembayaran->nisn);
+											// $this->db->join('nisn', 'nisn.id_kk = kompetensi_siswa.id_kk');
+											$query = $this->db->get();
+											// print_r($query->result());
+											$jnck = $query->result_array();
+											foreach ($jnck as $asw) {
+												echo "<b>" . $asw['nama'] . "</b>" . "<br>" . $pembayaran->nisn;
+											}
+
+											?>
+
 										</td>
+										<td><?= $pembayaran->tgl_bayar; ?></td>
+										<td><?= $pembayaran->bulan_dibayar; ?></td>
+										<td><?= $pembayaran->tahun_dibayar; ?></td>
+										<td><?php $this->db->select('nominal');
+											$this->db->from('spp');
+											$this->db->where('id_spp =', $pembayaran->id_spp);
+											// $this->db->join('kelas', 'kelas.id_kk = kompetensi_pemba$pembayaran.id_kk');
+											$query = $this->db->get();
+											// print_r($query->result());
+											$jnck = $query->result_array();
+											foreach ($jnck as $asw) {
+												echo rupiah($asw['nominal']);
+											} ?></td>
+										<td><?= rupiah($pembayaran->jumlah_bayar); ?></td>
+										<td>
+											<?php $this->db->select('nominal');
+											$this->db->from('spp');
+											$this->db->where('id_spp =', $pembayaran->id_spp);
+											// $this->db->join('kelas', 'kelas.id_kk = kompetensi_pemba$pembayaran.id_kk');
+											$query = $this->db->get();
+											// print_r($query->result());
+											$jnck = $query->result_array();
+											foreach ($jnck as $asw) {
+												if (intval($asw['nominal']) - $pembayaran->jumlah_bayar != "0") {
+													echo '<button type="button" class="btn btn-danger">' . rupiah(intval($asw['nominal']) - $pembayaran->jumlah_bayar) . '</button>';
+												} else {
+													echo '<button type="button" class="btn btn-success">Lunas</button>';
+												}
+											} ?></td>
+
+										</td>
+
 
 
 									</tr>
@@ -100,118 +165,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- Modal Tambah -->
-<div class="modal fade" id="tambahmodal" name="tambahmodal" tabindex="-1" aria-labelledby="tambahmodal" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="tambahmodal">Edit</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form action="<?= base_url('admin/Overview/Tambah') ?>" method="POST">
-					<div class="form-group">
-						<label for="exampleFormControlInput1">Username</label>
-						<input type="text" name="username" class="form-control" id="exampleFormControlInput1" placeholder="Masukkan Username..." required>
-					</div>
-					<div class="form-group">
-						<label for="edit">Password</label>
-						<input type="password" name="password" class="form-control" id="edit" placeholder="Masukkan password..." required>
-					</div>
-					<div class="form-group">
-						<label for="exampleFormControlSelect1">Level</label>
-						<select class="form-control" name="level" id="exampleFormControlSelect1" required>
-							<option>admin</option>
-							<option>petugas</option>
-							<option>siswa</option>
-						</select>
-					</div>
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Save changes</button>
-			</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-
-
-<!-- Modal Edit -->
-<?php foreach ($data_login as $login) : ?>
-	<div class="modal fade" id="editmodal<?= $login->id_login; ?>" name="editmodal" tabindex="-1" aria-labelledby="editmodal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="editmodal">Edit</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="<?= base_url('admin/Overview/Edit/') . $login->id_login ?>" method="POST">
-
-						<div class="form-group">
-							<label for="username">Username</label>
-							<input type="text" class="form-control" id="username" name="username" value="<?= $login->username ?>">
-						</div>
-						<div class="form-group">
-							<label for="password">Password</label>
-							<input type="text" class="form-control" id="password" name="password" value="<?= $login->password ?>">
-						</div>
-						<div class="form-group">
-							<label for="level">Level</label>
-							<select class="form-control" name="level" id="level">
-								<option><?= $login->level ?></option>
-								<option>admin</option>
-								<option>petugas</option>
-								<option>siswa</option>
-							</select>
-						</div>
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save changes</button>
-				</div>
-
-				</form>
-
-			</div>
-		</div>
-	</div>
-<?php endforeach;
-?>
-
-
-
-<!-- Modal Hapus -->
-<?php foreach ($data_login as $login) : ?>
-
-	<div class="modal fade" name="hapusmodal" id="hapusmodal<?= $login->id_login; ?>" tabindex="-1" aria-labelledby="hapusmodal" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 style="color: red;" class="modal-title" id="hapusmodal">!!WARNING!!</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="<?= base_url('admin/Overview/Delete/') . $login->id_login ?>" method="POST">
-						<h5 style="color: black;">Apakah Anda yakin akan menghapus akun <?= $login->username; ?> (<?= $login->level; ?>)?</h5>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-danger">Hapus</button>
-				</div>
-				</form>
-			</div>
-		</div>
-	</div>
-<?php endforeach; ?>

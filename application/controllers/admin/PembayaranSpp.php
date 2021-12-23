@@ -33,7 +33,7 @@ class PembayaranSpp extends CI_Controller
 			$data["data_keahlian"] = $this->kompetensi_keahlian_model->getDataKeahlian();
 			$data["data_siswa"] = $this->siswa_model->getDataSiswa();
 			$data["data_petugas"] = $this->petugas_model->getDataPetugas();
-			$data["data_pembayaran"] = $this->pembayaran_model->getDataPembayaran();
+			$data["data_pembayaran"] = $this->pembayaran_model->getDataPembayaranSiswa();
 			$data["summer"] = $this->siswa_model->sumAll();
 			$data["summer_pembayaran"] = $this->pembayaran_model->sumAll();
 			$data["minus_pembayaran"] = $this->pembayaran_model->Minus();

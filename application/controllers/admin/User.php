@@ -32,10 +32,11 @@ class User extends CI_Controller
 			$data["joinan"] = $this->kelas_model->getJoin();
 			$data["data_keahlian"] = $this->kompetensi_keahlian_model->getDataKeahlian();
 			$data["data_siswa"] = $this->siswa_model->getDataSiswa();
+			$data["data_pembayaran"] = $this->pembayaran_model->getDataPembayaranSiswa();
 			$data["summer"] = $this->siswa_model->sumAll();
 			$data["summer_pembayaran"] = $this->pembayaran_model->sumAll();
 			$data["minus_pembayaran"] = $this->pembayaran_model->Minus();
-			$this->load->view('admin/_partials/header.php');
+			$this->load->view('admin/_partials/siswa_header.php');
 			$this->load->view("admin/siswa_view.php", $data);
 			$this->load->view('admin/_partials/footer.php');
 		} else {

@@ -48,7 +48,7 @@ class Login extends CI_Controller
 				if ($rows > 0) {
 					$cek = $cek->row_array();
 					$data_session = array(
-						'username' => $cek['username'],
+						'username' => $cek['username']
 					);
 				}
 				$this->session->set_userdata('siswa', $data_session);

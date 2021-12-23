@@ -68,6 +68,17 @@ class Pembayaran_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+	public function getDataPembayaranSiswa()
+	{
+		$fag = $this->session->userdata('siswa');
+		$this->db->select("*");
+		$this->db->from('pembayaran a');
+		$this->db->join('siswa b', 'b.nisn=a.nisn',);
+		$this->db->join('login c', 'c.id_login=b.id_login');
+		$this->db->where('c.username', $fag['username']);
+		$query = $this->db->get();
+		return $query->result();
+	}
 
 	public function AddData($data)
 	{
