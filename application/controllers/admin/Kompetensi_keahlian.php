@@ -1,13 +1,13 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kompetensi_keahlian extends CI_Controller
 {
-	
+
 	public function __construct()
 	{
-	    parent::__construct();
-	    $this->load->model('kompetensi_keahlian_model');
+		parent::__construct();
+		$this->load->model('kompetensi_keahlian_model');
 	}
 
 
@@ -16,6 +16,8 @@ class Kompetensi_keahlian extends CI_Controller
 		$data['kompetensi_keahlian'] = $this->kompetensi_keahlian_model->getAll();
 		$this->load->view('admin/kelas_view/list', $data);
 	}
+
+
 
 
 	// public function tampil_chained()

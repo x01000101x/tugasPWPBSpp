@@ -32,12 +32,15 @@ class Login extends CI_Controller
 			$this->session->set_userdata($sesdata);
 			if ($level == 'admin') {
 				$this->session->set_userdata('akses', 'admin');
+				$this->session->set_flashdata('msg', 'Berhasil');
 				redirect('admin/overview');
 			} elseif ($level == 'petugas') {
 				$this->session->set_userdata('akses', 'petugas');
+				$this->session->set_flashdata('msg', 'Berhasil');
 				redirect('admin/pembayaran');
 			} elseif ($level == 'siswa') {
 				$this->session->set_userdata('akses', 'siswa');
+				$this->session->set_flashdata('msg', 'Berhasil');
 				redirect('admin/pembayaran');
 			}
 		}
@@ -46,7 +49,7 @@ class Login extends CI_Controller
 		// 	redirect('login');
 		// } 
 		else {
-			$this->session->set_flashdata('msg', 'Username or Password is Wrong');
+			$this->session->set_flashdata('msg', 'Username atau Password salah');
 			redirect('login');
 		}
 	}

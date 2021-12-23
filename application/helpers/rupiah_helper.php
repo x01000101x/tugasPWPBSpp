@@ -4,6 +4,6 @@ if (!function_exists('rupiah')) {
 	function rupiah($angka)
 	{
 		$hasil_rupiah = number_format($angka, 0, ',', '.');
-		return 'Rp' . $hasil_rupiah;
+		return 'Rp. ' . $hasil_rupiah;
 	}
 }
