@@ -12,7 +12,7 @@ class Overview extends CI_Controller
 
 	public function index()
 	{
-		if ($this->session->userdata('akses') == 'admin' || $this->session->userdata('akses') == 'petugas') {
+		if ($this->session->userdata('akses') == 'admin') {
 			// $get = $this->login_model->GetDataLogin();
 			// $data = array('data_login' => $get);
 			$data["data_login"] = $this->login_model->GetDataLogin();

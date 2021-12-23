@@ -1,6 +1,6 @@
 <?php
 
-class Murid extends CI_Controller
+class PetugasIndex extends CI_Controller
 {
 
 	public function __construct()
@@ -13,7 +13,7 @@ class Murid extends CI_Controller
 
 	public function index()
 	{
-		if ($this->session->userdata('akses') == 'admin') {
+		if ($this->session->userdata('akses') == 'admin' || $this->session->userdata('akses') == 'petugas') {
 			// $get = $this->login_model->GetDataLogin();
 			// $data = array('data_login' => $get);
 
@@ -32,11 +32,13 @@ class Murid extends CI_Controller
 			$data["joinan"] = $this->kelas_model->getJoin();
 			$data["data_keahlian"] = $this->kompetensi_keahlian_model->getDataKeahlian();
 			$data["data_siswa"] = $this->siswa_model->getDataSiswa();
+			$data["data_petugas"] = $this->petugas_model->getDataPetugas();
+			$data["data_pembayaran"] = $this->pembayaran_model->getDataPembayaran();
 			$data["summer"] = $this->siswa_model->sumAll();
 			$data["summer_pembayaran"] = $this->pembayaran_model->sumAll();
 			$data["minus_pembayaran"] = $this->pembayaran_model->Minus();
 			$this->load->view('admin/_partials/header.php');
-			$this->load->view("admin/murid_view.php", $data);
+			$this->load->view("admin/view_petugas.php", $data);
 			$this->load->view('admin/_partials/footer.php');
 		} else {
 			echo "Anda tidak berhak mengakses halaman ini";
@@ -46,62 +48,56 @@ class Murid extends CI_Controller
 
 	public function Tambah()
 	{
+		$id_petugas = $this->input->post('id_petugas');
 		$nisn = $this->input->post('nisn');
-		$nis = $this->input->post('nis');
-		$nama = $this->input->post('nama');
-		$id_kelas = $this->input->post('id_kelas');
-		$alamat = $this->input->post('alamat');
-		$no_telp = $this->input->post('no_telp');
+		$tgl_bayar = $this->input->post('tgl_bayar');
+		$bulan_dibayar = $this->input->post('bulan_dibayar');
+		$tahun_dibayar = $this->input->post('tahun_dibayar');
 		$id_spp = $this->input->post('id_spp');
-		$id_login = $this->input->post('id_login');
-
-
+		$jumlah_bayar = $this->input->post('jumlah_bayar');
 
 		$data = [
+			'id_petugas' => $id_petugas,
 			'nisn' => $nisn,
-			'nis' => $nis,
-			'nama' => $nama,
-			'id_kelas' => $id_kelas,
-			'alamat' => $alamat,
-			'no_telp' => $no_telp,
+			'tgl_bayar' => $tgl_bayar,
+			'bulan_dibayar' => $bulan_dibayar,
+			'tahun_dibayar' => $tahun_dibayar,
 			'id_spp' => $id_spp,
-			'id_login' => $id_login
-
+			'jumlah_bayar' => $jumlah_bayar
 
 		];
 
-		$this->siswa_model->AddData($data);
-		redirect('admin/Murid');
+		$this->pembayaran_model->AddData($data);
+		redirect('admin/PetugasIndex');
 	}
+
 
 	public function Edit($id)
 	{
+		$id_petugas = $this->input->post('id_petugas');
 		$nisn = $this->input->post('nisn');
-		$nis = $this->input->post('nis');
-		$nama = $this->input->post('nama');
-		$id_kelas = $this->input->post('id_kelas');
-		$alamat = $this->input->post('alamat');
-		$no_telp = $this->input->post('no_telp');
+		$tgl_bayar = $this->input->post('tgl_bayar');
+		$bulan_dibayar = $this->input->post('bulan_dibayar');
+		$tahun_dibayar = $this->input->post('tahun_dibayar');
 		$id_spp = $this->input->post('id_spp');
-		$id_login = $this->input->post('id_login');
+		$jumlah_bayar = $this->input->post('jumlah_bayar');
 
 		$data = [
+			'id_petugas' => $id_petugas,
 			'nisn' => $nisn,
-			'nis' => $nis,
-			'nama' => $nama,
-			'id_kelas' => $id_kelas,
-			'alamat' => $alamat,
-			'no_telp' => $no_telp,
+			'tgl_bayar' => $tgl_bayar,
+			'bulan_dibayar' => $bulan_dibayar,
+			'tahun_dibayar' => $tahun_dibayar,
 			'id_spp' => $id_spp,
-			'id_login' => $id_login
+			'jumlah_bayar' => $jumlah_bayar
 		];
 
-		$this->siswa_model->UpdateData($id, $data);
-		redirect('admin/Murid');
+		$this->pembayaran_model->UpdateData($id, $data);
+		redirect('admin/PetugasIndex');
 	}
 	public function Delete($id)
 	{
-		$this->siswa_model->DeleteData($id);
-		redirect(base_url('admin/Murid'));
+		$this->pembayaran_model->DeleteData($id);
+		redirect(base_url('admin/PetugasIndex'));
 	}
 }

@@ -37,7 +37,7 @@ class Login extends CI_Controller
 			} elseif ($level == 'petugas') {
 				$this->session->set_userdata('akses', 'petugas');
 				$this->session->set_flashdata('msg', 'Berhasil');
-				redirect('admin/pembayaran');
+				redirect('admin/PetugasIndex');
 			} elseif ($level == 'siswa') {
 				$this->session->set_userdata('akses', 'siswa');
 				$this->session->set_flashdata('msg', 'Berhasil');
