@@ -224,6 +224,23 @@
 						<div class="form-group">
 							<label for="id_kk">id_kk</label>
 							<select class="form-control" name="id_kk" id="exampleFormControlSelect1" required>
+								<option value="<?= intval($kelas->id_kk) ?>">
+
+									<?php
+									$this->db->select('nama_kk');
+									$this->db->from('kompetensi_keahlian');
+									$this->db->where('id_kk =', $kelas->id_kk);
+									// $this->db->join('kelas', 'kelas.id_kk = kompetensi_keahlian.id_kk');
+									$query = $this->db->get();
+									// print_r($query->result());
+									$jnck = $query->result_array();
+									foreach ($jnck as $asw) {
+										echo $asw['nama_kk'];
+									}
+
+
+
+									?></option>
 								<?php foreach ($data_keahlian as $keahlian) : ?>
 									<option value="<?= intval($keahlian->id_kk) ?>">
 
