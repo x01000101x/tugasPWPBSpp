@@ -35,7 +35,7 @@ class Keahlian extends CI_Controller
 			$this->load->view("admin/keahlian_view.php", $data);
 			$this->load->view('admin/_partials/footer.php');
 		} else {
-			echo "Anda tidak berhak mengakses halaman ini";
+			$this->load->view('403');
 		}
 	}
 
