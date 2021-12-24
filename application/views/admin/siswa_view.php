@@ -8,7 +8,16 @@
 						<h2 class="title-1">Selamat Datang, <?php
 
 															$fag = $this->session->userdata('siswa');
-															echo $fag['username'];
+															$this->db->select('b.nama');
+															$this->db->from('login a');
+															$this->db->join('siswa b', 'b.id_login=a.id_login',);
+															$this->db->where('a.username', $fag['username']);
+															$query = $this->db->get();
+															$anj = $query->result_array();
+															foreach ($anj as $val) {
+																// print_r($val['jumlah_bayar']);
+																echo "<b>" . $val['nama'] . "</b>	";
+															}
 															?></h2>
 
 					</div>
@@ -16,38 +25,63 @@
 			</div>
 			<div class="row m-t-25">
 				<div class="col-sm-6 col-lg-3">
-					<div class="overview-item overview-item--c1">
-						<a href="<?= base_url('admin/Murid') ?>">
-							<div class="overview__inner">
-								<div class="overview-box clearfix">
-									<div class="icon">
-										<i class="zmdi zmdi-account-o"></i>
-									</div>
-									<div class="text">
-										<h2><?php
-											$this->db->select('c.nominal, d.jumlah_bayar');
-											$this->db->from('login a');
-											$this->db->join('siswa b', 'b.id_login=a.id_login',);
-											$this->db->join('spp c', 'c.id_spp=b.id_spp');
-											$this->db->join('pembayaran d', 'd.nisn=b.nisn');
-											$this->db->where('a.username', $fag['username']);
-											$query = $this->db->get();
-											$anj = $query->result_array();
-											foreach ($anj as $val) {
-												// print_r($val['jumlah_bayar']);
-												$math = intval($val['nominal']) - intval($val['jumlah_bayar']);
-												echo rupiah($math);
-											}
-											?></h2>
-										<span>Siswa</span>
+					<?php
+					$this->db->select('c.nominal, d.jumlah_bayar');
+					$this->db->from('login a');
+					$this->db->join('siswa b', 'b.id_login=a.id_login',);
+					$this->db->join('spp c', 'c.id_spp=b.id_spp');
+					$this->db->join('pembayaran d', 'd.nisn=b.nisn');
+					$this->db->where('a.username', $fag['username']);
+					$query = $this->db->get();
+					$anj = $query->result_array();
+					foreach ($anj as $val) :
+						// print_r($val['jumlah_bayar']);
+						$math = intval($val['nominal']) - intval($val['jumlah_bayar']);
+						if ($math != 0) {
+							echo '<div class="overview-item overview-item--c3">
+							<a href="' . base_url("admin/User")  . ' ">
+								<div class="overview__inner">
+									<div class="overview-box clearfix">
+										<div class="icon">
+											<i class="zmdi zmdi-money"></i>
+										</div>
+										<div class="text">
+											<h2>' . rupiah($math) . '</h2>
+											<span>Tunggakan</span>
 
+										</div>
+									</div>
+									<div class="overview-chart">
+										<!-- <canvas id="widgetChart1"></canvas> -->
 									</div>
 								</div>
-								<div class="overview-chart">
-									<!-- <canvas id="widgetChart1"></canvas> -->
+						</div>';
+						} else {
+							echo '<div class="overview-item overview-item--c4">
+							<a href=" ' . base_url("admin/User") . ' ">
+								<div class="overview__inner">
+									<div class="overview-box clearfix">
+										<div class="icon">
+											<i class="zmdi zmdi-money"></i>
+										</div>
+										<div class="text">
+											<h2><b>LUNAS</b></h2>
+											<span>Tidak Ada Tunggakan</span>
+
+										</div>
+									</div>
+									<div class="overview-chart">
+										<!-- <canvas id="widgetChart1"></canvas> -->
+									</div>
 								</div>
-							</div>
-					</div>
+						</div>';
+						}
+
+
+
+					?>
+
+					<?php endforeach; ?>
 					</a>
 				</div>
 
@@ -55,12 +89,8 @@
 
 			<div class="row">
 				<div class="col-lg-12">
-					<h2 class="title-1 m-b-25">Akun Terdaftar</h2> <!-- Button trigger modal -->
+					<h2 class="title-1 m-b-25">Rincian SPP</h2> <!-- Button trigger modal -->
 					<div class="text-right">
-
-						<button type="button" class="btn btn-primary" name="tambah" data-toggle="modal" data-target="#tambahmodal">
-							Tambah data
-						</button><br><br>
 
 					</div>
 					<div class="table-responsive table--no-card m-b-40">
