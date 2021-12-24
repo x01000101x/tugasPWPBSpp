@@ -222,7 +222,7 @@
 							<input type="text" class="form-control" id="nama_kelas" name="nama_kelas" value="<?= $kelas->nama_kelas ?>">
 						</div>
 						<div class="form-group">
-							<label for="id_kk">id_kk</label>
+							<label for="id_kk">Kompetensi Keahlian</label>
 							<select class="form-control" name="id_kk" id="exampleFormControlSelect1" required>
 								<option value="<?= intval($kelas->id_kk) ?>">
 
