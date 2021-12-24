@@ -93,16 +93,16 @@
 			<div class="menu-sidebar__content js-scrollbar1">
 				<nav class="navbar-sidebar">
 					<ul class="list-unstyled navbar__list">
-						<li class="active has-sub">
-							<a class="js-arrow" href="<?= base_url('admin/PetugasIndex') ?>">
+						<li class="has-sub">
+							<a class="js-arrow" href="<?= base_url('admin/Overview') ?>">
 								<i class="fas fa-tachometer-alt"></i>Dashboard</a>
 
 						</li>
 
 					</ul>
 					<ul class="list-unstyled navbar__list">
-						<li class="has-sub">
-							<a class="js-arrow" href="<?= base_url('admin/MasterPetugas') ?>">
+						<li class="active has-sub">
+							<a class="js-arrow" href="<?= base_url('admin/Master') ?>">
 								<i class="fas fa-home"></i>Master</a>
 
 						</li>
