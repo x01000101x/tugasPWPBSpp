@@ -28,7 +28,7 @@ class Overview extends CI_Controller
 			$this->load->view('admin/overview_view', $data);
 			$this->load->view('admin/_partials/footer');
 		} else {
-			echo "Anda tidak berhak mengakses halaman ini";
+			$this->load->view('403');
 		}
 	}
 	public function getdata()
