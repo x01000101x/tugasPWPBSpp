@@ -62,7 +62,8 @@ class Login extends CI_Controller
 		// 	redirect('login');
 		// } 
 		else {
-			$this->session->set_flashdata('msg', 'Username atau Password salah');
+			$this->session->set_flashdata('msg', '<div class="p-3 mb-2 bg-danger text-white">Username atau Password salah</div>
+			');
 			redirect('login');
 		}
 	}

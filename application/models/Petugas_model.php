@@ -61,7 +61,7 @@ class Petugas_model extends CI_Model
 	public function DeleteData($id)
 	{
 		$this->db->where('id_petugas', $id);
-		$this->db->delete('siswa');
+		$this->db->delete('petugas');
 	}
 
 	public function getAll()

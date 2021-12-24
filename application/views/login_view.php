@@ -27,7 +27,9 @@
 
 <body>
 
+
 	<div class="limiter">
+		<?php echo $this->session->flashdata('msg'); ?>
 		<div class="container-login100" style="background-image: url('https://c.tenor.com/qLwHysB86VYAAAAd/lofi.gif');">
 			<div class="wrap-login100 p-t-190 p-b-30">
 				<form class="login100-form validate-form" action="<?php echo site_url('Login/auth'); ?>" method="post">
